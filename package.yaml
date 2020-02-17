@@ -1,0 +1,37 @@
+name:                lambdalogo
+version:             1.0.0
+github:              "danielrolls/lambdalogo"
+license:             AllRightsReserved
+author:              "Daniel Rolls"
+maintainer:          "daniel.rolls.27@googlemail.com"
+copyright:           "2020 Daniel Rolls"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/danielrolls/lambdalogo#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- diagrams
+- diagrams-lib
+- diagrams-rasterific
+- diagrams-svg
+- SVGFonts
+
+library:
+  source-dirs: []
+
+executables:
+  lambdalogo-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - lambdalogo
+
+default-extensions:
+- NoMonomorphismRestriction
