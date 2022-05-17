@@ -7,19 +7,33 @@ import Diagrams.Backend.Rasterific
 import Diagrams.Size (dims)
 import Graphics.SVGFonts 
 
+
 lambda = "\x03BB"
 
-myCircle = circle 0.32 # fc sandybrown 
-                       # lc sandybrown
+greenCircle = circle 0.32 # greenCentreFadingToWhite
+                          # lc white
+  where greenCentreFadingToWhite = fillTexture $ mkRadialGradient (mkStops [(lightgreen,0,1), (white,1,1)])
+                                                                  (0 ^& 0) 0.30
+                                                                  (0 ^& 0) 0.32
+                                                                  GradPad
 
-textADot = strutX 0.15 ||| stroke (textSVG' def {mode=INSIDE_W, textWidth=0.3} ("a." <> lambda <> "b.a")) # fc blue 
-                                                                                                          # lc blue 
-                                                                                                          # rotateBy (1/4)
+lambdaCalculusText = strutX 0.15 
+                       |||
+                     stroke (textSVG' def 
+                                      {mode=INSIDE_W, textWidth=0.35}
+                                      ("a." <> lambda <> "b.a"))
+                        # fc silver 
+                        # lc silver 
+                        # rotateBy (1/4)
 
-textLambda :: Diagram B
-textLambda = stroke (textSVG' with {mode=INSIDE_WH, textWidth=1, textHeight=1} lambda) # fc blue
+bigLambda :: Diagram B
+bigLambda = stroke (textSVG' with {mode=INSIDE_WH, textWidth=1, textHeight=1} lambda)
+               # fc silver
+               # lc silver
 
 main = renderRasterific "lambda.png" 
                         (dims $ V2 500 500)
-                        $ textADot <> textLambda <> myCircle
+                        $    lambdaCalculusText
+                          <> bigLambda
+                          <> greenCircle # translateY (-0.015)
 
