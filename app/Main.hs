@@ -26,14 +26,16 @@ lambdaCalculusText = strutX 0.15
                         # lc silver 
                         # rotateBy (1/4)
 
-bigLambda :: Diagram B
 bigLambda = stroke (textSVG' with {mode=INSIDE_WH, textWidth=1, textHeight=1} lambda)
                # fc silver
                # lc silver
 
+logo :: Diagram B
+logo = lambdaCalculusText
+       <> bigLambda
+       <> greenCircle # translateY (-0.015)
+
 main = renderRasterific "lambda.png" 
                         (dims $ V2 500 500)
-                        $    lambdaCalculusText
-                          <> bigLambda
-                          <> greenCircle # translateY (-0.015)
+                        logo
 
